@@ -49,10 +49,16 @@ namespace NotePad
         {
             if (!string.IsNullOrEmpty(this.txbWindow.Text))
             {
-                if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                if(this.Text == "Untitled")
                 {
-                    File.WriteAllText(SaveFileDialog.FileName, this.txbWindow.Text);
-                    this.Text = SaveFileDialog.FileName;
+                    if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllText(SaveFileDialog.FileName, this.txbWindow.Text);
+                        this.Text = SaveFileDialog.FileName;
+                    }
+                } else
+                {
+                    File.WriteAllText(this.Text, this.txbWindow.Text);
                 }
             }
             else
